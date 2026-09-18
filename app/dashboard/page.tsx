@@ -232,7 +232,7 @@ setTotalIncidents(incidents?.length || 0);
 
             {/* REGISTRAR */}
             <button
-              onClick={() => router.push("/dashboard/paquetes/registrar")}
+             onClick={() => router.push("/dashboard/registrar")}
               className="group rounded-2xl border border-slate-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:border-green-300 hover:shadow-md"
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-2xl">
