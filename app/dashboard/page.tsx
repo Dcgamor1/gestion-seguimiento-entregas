@@ -7,8 +7,13 @@ import { createClient } from "@/lib/supabase/client";
 export default function DashboardPage() {
   const router = useRouter();
 
-  const [userName, setUserName] = useState("Administrador");
-  const [loading, setLoading] = useState(true);
+const [userName, setUserName] = useState("Administrador");
+const [loading, setLoading] = useState(true);
+
+const [totalPackages, setTotalPackages] = useState(0);
+const [inTransitPackages, setInTransitPackages] = useState(0);
+const [deliveredPackages, setDeliveredPackages] = useState(0);
+const [totalIncidents, setTotalIncidents] = useState(0);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -23,6 +28,26 @@ export default function DashboardPage() {
         return;
       }
 
+      const { data: packages } = await supabase
+  .from("packages")
+  .select("status");
+
+const { data: incidents } = await supabase
+  .from("incidents")
+  .select("id");
+
+setTotalPackages(packages?.length || 0);
+
+setInTransitPackages(
+  packages?.filter((pkg) => pkg.status === "En tránsito").length || 0
+);
+
+setDeliveredPackages(
+  packages?.filter((pkg) => pkg.status === "Entregado").length || 0
+);
+
+setTotalIncidents(incidents?.length || 0);
+      
       const { data: profile } = await supabase
         .from("profiles")
         .select("full_name, role")
@@ -144,7 +169,7 @@ export default function DashboardPage() {
             </p>
 
             <p className="mt-1 text-3xl font-bold text-slate-900">
-              1
+              {totalPackages}
             </p>
           </div>
 
@@ -159,7 +184,7 @@ export default function DashboardPage() {
             </p>
 
             <p className="mt-1 text-3xl font-bold text-slate-900">
-              0
+              {inTransitPackages}
             </p>
           </div>
 
@@ -174,7 +199,7 @@ export default function DashboardPage() {
             </p>
 
             <p className="mt-1 text-3xl font-bold text-slate-900">
-              0
+              {deliveredPackages}
             </p>
           </div>
 
@@ -189,7 +214,7 @@ export default function DashboardPage() {
             </p>
 
             <p className="mt-1 text-3xl font-bold text-slate-900">
-              0
+              {totalIncidents}
             </p>
           </div>
 
