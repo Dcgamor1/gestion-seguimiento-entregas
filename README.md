@@ -168,8 +168,6 @@ con:
 NEXT_PUBLIC_SUPABASE_URL=TU_URL_DE_SUPABASE
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=TU_CLAVE_PUBLICABLE
 
-Las credenciales reales no deben publicarse en el repositorio.
-
 💻 Instalación
 
 Clonar el repositorio:
